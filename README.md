@@ -3,13 +3,16 @@ Cheat cheat for LDAP tasks
 
 #### Listing DN in cn=config
 ```
-sudo ldapsearch  -Y EXTERNAL -H ldapi:/// -b cn=config dn
+ldapsearch  -Y EXTERNAL -H ldapi:/// -b cn=config dn
 ...
 # {1}hdb, config
 dn: olcDatabase={1}hdb,cn=config
 ...
+```
 
-sudo ldapsearch  -Y EXTERNAL -H ldapi:/// -b cn=config 'olcDatabase={1}hdb'
+#### Looking into current ACL configs
+```
+ldapsearch  -Y EXTERNAL -H ldapi:/// -b cn=config 'olcDatabase={1}hdb'
 
 # {1}hdb, config
 dn: olcDatabase={1}hdb,cn=config
@@ -33,7 +36,7 @@ olcDbConfig: {3}set_lk_max_lockers 1500
 olcDbIndex: objectClass eq
 ```
 
-#### Example ACL for group with olcAccess
+#### Replacing current ACLs with new one
 ```
 dn: olcDatabase={1}hdb,cn=config
 changetype: modify
