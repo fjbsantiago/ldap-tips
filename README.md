@@ -1,7 +1,7 @@
 # ldap-tips
 Cheat cheat for LDAP tasks
 
-### list DN in cn=config 
+#### Listing DN in cn=config
 ```
 sudo ldapsearch  -Y EXTERNAL -H ldapi:/// -b cn=config dn
 ...
@@ -33,7 +33,7 @@ olcDbConfig: {3}set_lk_max_lockers 1500
 olcDbIndex: objectClass eq
 ```
 
-### ACL for group with olcAccess
+#### Example ACL for group with olcAccess
 ```
 dn: olcDatabase={1}hdb,cn=config
 changetype: modify
@@ -45,7 +45,7 @@ olcAccess: to * by self write by dn="cn=admin,dc=example,dc=com" write by * read
 olcAccess: to dn.base="cn=user,ou=groups,dc=example,dc=com" by * read
 ```
 
-### Loading ACL from .ldif file and applying it
+#### Loading ACL from .ldif file and applying it
 ```
 ldapmodify  -Y EXTERNAL -H ldapi:/// -f /tmp/group_acl.ldif 
 ```
