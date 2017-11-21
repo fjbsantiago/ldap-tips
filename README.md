@@ -44,11 +44,13 @@ delete: olcAccess
 -
 add: olcAccess
 olcAccess: to attrs=userPassword,shadowLastChange by self write by dn="cn=admin,dc=example,dc=com" write by anonymous auth by * read
-olcAccess: to * by self write by dn="cn=admin,dc=example,dc=com" write by * read
+olcAccess: to * by self write by dn="cn=admin,dc=example,dc=com" write by * none break
 olcAccess: to dn.base="cn=user,ou=groups,dc=example,dc=com" by * read
 ```
 
+Note: the **break** keyword on the second olcAccess. Even though this ACL is broad enough to cover every user, this makes LDAP keep evaluating following ACLs.
+
 #### Loading ACL from .ldif file and applying it
 ```
-ldapmodify  -Y EXTERNAL -H ldapi:/// -f /tmp/group_acl.ldif 
+ldapmodify  -Y EXTERNAL -H ldapi:/// -f my_acl.ldif 
 ```
